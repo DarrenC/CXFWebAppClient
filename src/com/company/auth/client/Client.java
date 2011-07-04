@@ -1,5 +1,8 @@
 package com.company.auth.client;
 
+import java.io.File;
+import java.io.FileOutputStream;
+
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
@@ -25,6 +28,16 @@ public final class Client {
     	Employee employee = client.getEmployee("0223938");
     	System.out.println("Server said: " + employee.getLastName() + ", " + employee.getFirstName());
     	System.out.println("Server said: " + employee.getEmpAddress().getAddressType() + ", " + employee.getEmpAddress().getAddress().getStreetName());
+    	
+    	
+    	byte[] pdfBytes = client.getPdf();
+    	
+    	FileOutputStream fos = new FileOutputStream(new File("/Users/darren/dc.pdf"));
+    	fos.write(pdfBytes);
+    	fos.close();
+    	System.out.println("Server said: DONE");
+    	
+    	
     	System.exit(0);
 
     }
